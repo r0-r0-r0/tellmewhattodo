@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.wrapper {
+  position: relative;
+  width: 90%;
+  height: 100%;
+  max-width: 1440px;
+  max-height: 90vh;
+  aspect-ratio: 4 / 3;
+  background-color: #ffb1c1;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  z-index: 1;
+}
+
+.noise-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Transparent link boxes */
+.agent-box {
+  position: absolute;
+  top: calc(var(--y) * 1%);
+  left: calc(var(--x) * 1%);
+  width: calc(var(--w) * 1%);
+  height: calc(var(--h) * 1%);
+  z-index: 3;
+  cursor: pointer;
+  text-decoration: none;
+  /* Optional debug outline: uncomment if needed */
+  /* border: 2px solid red; */
+}
