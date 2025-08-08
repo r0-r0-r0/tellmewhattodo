@@ -9,6 +9,17 @@
   <body>
     <div class="wrapper">
       <img src="./img/bg-t_01.png" alt="Background" class="main-image" />
+      <!-- 플로팅 ? 버튼 -->
+      <div class="floating-menu">
+        <ul class="menu-list">
+          <li><a href="introduction.html">Introduction</a></li>
+          <li><a href="bio.html">Bio</a></li>
+          <li><a href="podcasts.html">Podcasts & Articles</a></li>
+          <li><a href="critique.html">A Feminist Critique</a></li>
+        </ul>
+        <button class="menu-btn">?</button>
+      </div>
+
       <div class="noise-overlay"></div>
 
       <!-- LINK BOXES -->
@@ -49,4 +60,25 @@
       ></a>
     </div>
   </body>
+  <script>
+    const menuBtn = document.querySelector(".menu-btn");
+    const menuList = document.querySelector(".menu-list");
+
+    // 버튼 클릭 시 메뉴 토글
+    menuBtn.addEventListener("click", (event) => {
+      event.stopPropagation(); // 외부 클릭 감지 방지
+      menuList.style.display =
+        menuList.style.display === "flex" ? "none" : "flex";
+    });
+
+    // 메뉴 클릭 시 닫히지 않게
+    menuList.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
+
+    // 외부 클릭 시 메뉴 닫기
+    document.addEventListener("click", () => {
+      menuList.style.display = "none";
+    });
+  </script>
 </html>

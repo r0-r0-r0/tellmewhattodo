@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction - Tell Me What to Do</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <a href="index.html" class="close-button">×</a>
+      <div class="text-wrapper">
+        <div class="bio-section">
+          <div class="text-huge">Meet the Artists</div>
+
+          <div class="artist">
+            <h2>Susannah Montgomery</h2>
+            <br />
+            <p>
+              Business Development Manager at the European Institute of
+              Innovation and Technology (EIT) Culture & Creativity, where she
+              connects stakeholders to drive innovation in the culture and
+              creative sectors.
+            </p>
+            <p>
+              She specializes in making complex topics, such as AI,
+              misinformation, and European values, tangible through interactive
+              experiences. Recently, she has managed cultural game jams across
+              Europe for the EPIC-WE project and co-created
+              <em
+                >Fabricated – Unravel Fact from Fiction in Your Digital
+                World</em
+              >, an award-winning exhibition engaging participants across Europe
+              and the United States on AI, misinformation, and digitization.
+            </p>
+          </div>
+
+          <div class="artist">
+            <h2>Gema FB Martín</h2>
+            <br />
+            <p>
+              Social scientist, clinical psychologist, and media artist. She
+              does academic research on how technologies work and their societal
+              impact from a psychological perspective (specifically in
+              artificial emotions).
+            </p>
+            <p>
+              Based in Utrecht, Gema works as a lecturer and researcher. Her
+              work blends art, science, and tech, with a focus on sound fiction
+              and conceptual projects. She previously collaborated with CODE
+              2024 on <em>ToyBoi</em>, exploring themes of AI ethics and the
+              male gaze.
+            </p>
+          </div>
+
+          <div class="artist">
+            <h2>Ayoon Ro</h2>
+            <br />
+            <p>
+              South Korean-born, Amsterdam-based artist exploring the fragile
+              tension between destruction and beauty through her paintings.
+              Expanding her artistic practice into digital media, she works with
+              animation, gaming, and extended reality (XR) with a focus on
+              challenging how we experience memory and emotion.
+            </p>
+            <p>
+              Through her work, Ayoon invites us to introspect into the
+              imperfect nature of being human.
+            </p>
+          </div>
+
+          <div class="artist">
+            <h2>Anastasia Karagianni</h2>
+            <br />
+            <p>
+              Doctoral researcher in Law, Gender and Technology at the Law
+              Science Technology and Society research group of Vrije
+              Universiteit Brussels (VUB), and former FARI scholar.
+            </p>
+            <p>
+              FARI, an initiative from the VUB and Université Libre de
+              Bruxelles, is an independent Institute that supports research in
+              AI. Anastasia is also co-founder of DATAWO, a Greece-based civil
+              society organisation advocating for gender equality in the digital
+              era, and founder of the activist group “femme group Brussels GR”.
+            </p>
+            <p>
+              She was a 2023 MozFest Ambassador and a Mozilla Awardee for the
+              project <em>A Feminist Dictionary in AI</em>, developed within the
+              Trustworthy Artificial Intelligence working group.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="floating-menu">
+        <ul class="menu-list">
+          <li><a href="introduction.html">Introduction</a></li>
+          <li><a href="bio.html">Bio</a></li>
+          <li><a href="podcasts.html">Podcasts & Articles</a></li>
+          <li><a href="critique.html">A Feminist Critique</a></li>
+        </ul>
+        <button class="menu-btn">?</button>
+      </div>
+    </div>
+
+    <script>
+      const menuBtn = document.querySelector(".menu-btn");
+      const menuList = document.querySelector(".menu-list");
+
+      // 버튼 클릭 시 메뉴 토글
+      menuBtn.addEventListener("click", (event) => {
+        event.stopPropagation(); // 외부 클릭 감지 방지
+        menuList.style.display =
+          menuList.style.display === "flex" ? "none" : "flex";
+      });
+
+      // 메뉴 클릭 시 닫히지 않게
+      menuList.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+
+      // 외부 클릭 시 메뉴 닫기
+      document.addEventListener("click", () => {
+        menuList.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

@@ -14,6 +14,8 @@ body {
   justify-content: center;
   font-family: sans-serif;
   overflow: hidden;
+  font-family: "Raleway", sans-serif;
+  font-size: 0.95rem;
 }
 
 .wrapper {
@@ -27,6 +29,70 @@ body {
   border-radius: 40px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.page-wrapper {
+  background-color: #ffb1c1; /* 안쪽만 핑크 */
+  border: 10px solid black; /* 테두리 유지 */
+  border-radius: 40px;
+  padding: 40px;
+  max-width: 1440px;
+  width: 90%;
+  height: 100%;
+  max-height: 90vh;
+  overflow-y: auto; /* 스크롤 가능 */
+  box-sizing: border-box;
+}
+
+.text-wrapper {
+  width: 50%;
+  margin: 2vw auto;
+  display: flex;
+  flex-direction: column; /* 세로 방향 배치 */
+  align-items: center; /* 가로 중앙 */
+  justify-content: center; /* 세로 중앙 */
+  line-height: 1.8rem;
+}
+
+.text-huge {
+  font-size: 3rem;
+  line-height: 3rem;
+  font-weight: 900;
+  margin-bottom: 50px;
+}
+.header h1 {
+  font-size: 1rem;
+  line-height: 2rem;
+  margin-bottom: 20px;
+}
+
+.lead {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+h2 {
+  margin-top: 30px;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 900;
+}
+
+blockquote {
+  font-style: italic;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 10px 15px;
+  border-left: 4px solid black;
+  margin: 20px 0;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+ul li {
+  margin-bottom: 10px;
 }
 
 .main-image {
@@ -61,4 +127,92 @@ body {
   text-decoration: none;
   /* Optional debug outline: uncomment if needed */
   /* border: 2px solid red; */
+}
+/* 플로팅 메뉴 전체 */
+.floating-menu {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* 버튼 */
+.menu-btn {
+  background-color: black;
+  color: white;
+  font-size: 24px;
+  border: none;
+  border-radius: 50%;
+  width: 4vw;
+  height: 4vw;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  position: relative;
+  z-index: 2; /* 메뉴보다 위에 뜨게 */
+}
+
+.menu-btn:hover {
+  background-color: #ffb1c1;
+  color: black;
+}
+
+.menu-list {
+  position: absolute;
+  bottom: 60px; /* 버튼 위로 띄우기 */
+  right: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 180px; /* 최소 폭 지정 */
+}
+
+.menu-list li {
+  margin-bottom: 30px;
+  width: 100%; /* 텍스트가 잘리지 않게 */
+}
+
+.menu-list a {
+  background: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  white-space: nowrap; /* 줄바꿈 없이 한 줄에 */
+}
+
+.menu-list a:hover {
+  background: #ffb1c1;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  background-color: black;
+  color: white;
+  font-size: 24px;
+  border: none;
+  border-radius: 50%;
+  width: 4vw;
+  height: 4vw;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  z-index: 2; /* 메뉴보다 위에 뜨게 */
+}
+
+.close-button:hover {
+  background-color: #ffb1c1;
+  color: black;
 }
