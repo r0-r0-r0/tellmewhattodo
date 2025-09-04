@@ -8,8 +8,78 @@
   </head>
   <body>
     <div class="wrapper">
-      <img src="./img/bg-t_01.png" alt="Background" class="main-image" />
-      <!-- 플로팅 ? 버튼 -->
+      <div class="cta-center">
+        <h1>Pick up the phone. Confess.</h1>
+        <p>Start your free trial now.</p>
+      </div>
+      <div class="agent-container">
+        <!-- 상단 4명 -->
+
+        <a href="agent-mrjax.html">
+          <img
+            src="./img/mrjax.png"
+            class="agent-image"
+            style="--x: 16; --y: 29; --w: 14"
+            alt="Mr Jax"
+          />
+        </a>
+
+        <a href="agent-tom.html">
+          <img
+            src="./img/tom.png"
+            class="agent-image"
+            style="--x: 39; --y: 22; --w: 12"
+            alt="Tom"
+          />
+        </a>
+
+        <a href="agent-eva.html">
+          <img
+            src="./img/eva.png"
+            class="agent-image"
+            style="--x: 62; --y: 22; --w: 15"
+            alt="Eva"
+          />
+        </a>
+
+        <a href="agent-talia.html">
+          <img
+            src="./img/talia.png"
+            class="agent-image"
+            style="--x: 84; --y: 29; --w: 11"
+            alt="Talia"
+          />
+        </a>
+
+        <!-- 하단 3명 -->
+        <a href="agent-lily.html">
+          <img
+            src="./img/lily.png"
+            class="agent-image"
+            style="--x: 20; --y: 70; --w: 13"
+            alt="Lily"
+          />
+        </a>
+
+        <a href="agent-paul.html">
+          <img
+            src="./img/paul.png"
+            class="agent-image"
+            style="--x: 50; --y: 74; --w: 12"
+            alt="Father Paul"
+          />
+        </a>
+
+        <a href="agent-adam.html">
+          <img
+            src="./img/adam.png"
+            class="agent-image"
+            style="--x: 82; --y: 70; --w: 14"
+            alt="Adam"
+          />
+        </a>
+      </div>
+
       <div class="floating-menu">
         <ul class="menu-list">
           <li><a href="introduction.html">Introduction</a></li>
@@ -21,50 +91,12 @@
       </div>
 
       <div class="noise-overlay"></div>
-
-      <!-- LINK BOXES -->
-      <a
-        href="#"
-        class="agent-box"
-        style="--x: 7; --y: 7; --w: 17; --h: 28"
-      ></a>
-      <a
-        href="#"
-        class="agent-box"
-        style="--x: 38; --y: 6; --w: 14; --h: 24"
-      ></a>
-      <a
-        href="#"
-        class="agent-box"
-        style="--x: 59; --y: 5; --w: 14; --h: 25"
-      ></a>
-      <a
-        href="#"
-        class="agent-box"
-        style="--x: 79; --y: 10; --w: 14; --h: 26"
-      ></a>
-      <a
-        href="#"
-        class="agent-box"
-        style="--x: 7; --y: 60; --w: 16; --h: 28"
-      ></a>
-      <a
-        href="#"
-        class="agent-box"
-        style="--x: 37; --y: 60; --w: 15; --h: 28"
-      ></a>
-      <a
-        href="#"
-        class="agent-box"
-        style="--x: 73; --y: 58; --w: 14; --h: 30"
-      ></a>
     </div>
   </body>
   <script>
     const menuBtn = document.querySelector(".menu-btn");
     const menuList = document.querySelector(".menu-list");
 
-    // 버튼 클릭 시 메뉴 토글
     menuBtn.addEventListener("click", (event) => {
       event.stopPropagation(); // 외부 클릭 감지 방지
       menuList.style.display =

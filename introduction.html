@@ -263,19 +263,16 @@
       const menuBtn = document.querySelector(".menu-btn");
       const menuList = document.querySelector(".menu-list");
 
-      // 버튼 클릭 시 메뉴 토글
       menuBtn.addEventListener("click", (event) => {
-        event.stopPropagation(); // 외부 클릭 감지 방지
+        event.stopPropagation();
         menuList.style.display =
           menuList.style.display === "flex" ? "none" : "flex";
       });
 
-      // 메뉴 클릭 시 닫히지 않게
       menuList.addEventListener("click", (event) => {
         event.stopPropagation();
       });
 
-      // 외부 클릭 시 메뉴 닫기
       document.addEventListener("click", () => {
         menuList.style.display = "none";
       });

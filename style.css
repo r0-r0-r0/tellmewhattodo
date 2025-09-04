@@ -29,18 +29,22 @@ body {
   border-radius: 40px;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+
+  display: block;
+  padding: 0;
+  gap: 0;
 }
 
 .page-wrapper {
-  background-color: #ffb1c1; /* 안쪽만 핑크 */
-  border: 10px solid black; /* 테두리 유지 */
+  background-color: #ffb1c1;
+  border: 10px solid black;
   border-radius: 40px;
   padding: 40px;
   max-width: 1440px;
   width: 90%;
   height: 100%;
   max-height: 90vh;
-  overflow-y: auto; /* 스크롤 가능 */
+  overflow-y: auto;
   box-sizing: border-box;
 }
 
@@ -48,9 +52,9 @@ body {
   width: 50%;
   margin: 2vw auto;
   display: flex;
-  flex-direction: column; /* 세로 방향 배치 */
-  align-items: center; /* 가로 중앙 */
-  justify-content: center; /* 세로 중앙 */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   line-height: 1.8rem;
 }
 
@@ -115,20 +119,6 @@ ul li {
   z-index: 2;
 }
 
-/* Transparent link boxes */
-.agent-box {
-  position: absolute;
-  top: calc(var(--y) * 1%);
-  left: calc(var(--x) * 1%);
-  width: calc(var(--w) * 1%);
-  height: calc(var(--h) * 1%);
-  z-index: 3;
-  cursor: pointer;
-  text-decoration: none;
-  /* Optional debug outline: uncomment if needed */
-  /* border: 2px solid red; */
-}
-/* 플로팅 메뉴 전체 */
 .floating-menu {
   position: fixed;
   bottom: 20px;
@@ -136,7 +126,6 @@ ul li {
   z-index: 1000;
 }
 
-/* 버튼 */
 .menu-btn {
   background-color: black;
   color: white;
@@ -148,7 +137,7 @@ ul li {
   cursor: pointer;
   transition: background-color 0.2s;
   position: relative;
-  z-index: 2; /* 메뉴보다 위에 뜨게 */
+  z-index: 2;
 }
 
 .menu-btn:hover {
@@ -158,7 +147,7 @@ ul li {
 
 .menu-list {
   position: absolute;
-  bottom: 60px; /* 버튼 위로 띄우기 */
+  bottom: 100px;
   right: 0;
   list-style: none;
   padding: 0;
@@ -166,12 +155,13 @@ ul li {
   display: none;
   flex-direction: column;
   align-items: flex-end;
-  min-width: 180px; /* 최소 폭 지정 */
+  min-width: 170px;
 }
 
 .menu-list li {
-  margin-bottom: 30px;
-  width: 100%; /* 텍스트가 잘리지 않게 */
+  margin: -10px;
+  padding: 0;
+  width: 100%;
 }
 
 .menu-list a {
@@ -182,7 +172,7 @@ ul li {
   color: black;
   font-size: 14px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  white-space: nowrap; /* 줄바꿈 없이 한 줄에 */
+  white-space: nowrap;
 }
 
 .menu-list a:hover {
@@ -209,10 +199,346 @@ ul li {
   cursor: pointer;
   transition: background-color 0.2s;
 
-  z-index: 2; /* 메뉴보다 위에 뜨게 */
+  z-index: 2;
 }
 
 .close-button:hover {
   background-color: #ffb1c1;
   color: black;
+}
+
+.lyrics-wrapper {
+  position: relative;
+  width: 80%;
+  margin: 2vw auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 72px;
+}
+
+.panel {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.panel.lyrics {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+
+  overflow: hidden;
+}
+
+.panel.lyrics::before,
+.panel.lyrics::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--fade-h);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 200px;
+  pointer-events: none;
+  z-index: 3;
+}
+.fade-top {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 177, 193, 1),
+    rgba(255, 177, 193, 0)
+  );
+}
+.fade-bottom {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(255, 177, 193, 1),
+    rgba(255, 177, 193, 0)
+  );
+}
+
+.lyrics {
+  overflow: auto;
+  padding: 1rem;
+  padding-top: 5rem;
+
+  max-height: 70vh;
+}
+
+.lyrics-scroll {
+  position: relative;
+  z-index: 1;
+  max-height: 70vh;
+  overflow: auto;
+  padding: 6rem 1rem 1rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+li {
+  margin: 0.6em 0;
+  opacity: 0.55;
+  transition: 0.25s;
+  font-size: 4vw;
+  line-height: 1.4;
+  color: #504747;
+  font-weight: 400;
+}
+li.current {
+  opacity: 1;
+  color: #fff;
+  font-weight: 600;
+  font-size: 4vw;
+}
+
+.button-set {
+  position: absolute;
+  z-index: 30;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.controls {
+  position: absolute;
+
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.controls button {
+  font-family: "Raleway", sans-serif;
+  padding: 0.5em 1em;
+  border-radius: 60px;
+  border: none;
+  background: #333;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+.controls button:hover {
+  background: #444;
+}
+
+.agent-image-min {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.agent-intro {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 5;
+}
+
+.agent-image-min {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.agent-intro p {
+  margin: 0;
+  background: #fff;
+  color: #000;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.35;
+  max-width: 500px;
+  min-width: 40vw;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.agent-container {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.agent-image {
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  width: calc(var(--w) * 1%);
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.agent-box {
+  z-index: 4;
+}
+
+.cta-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 3;
+  pointer-events: none;
+}
+.cta-center h1 {
+  font-family: "Raleway", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.8vw;
+  line-height: 1.1;
+  color: #fff;
+  letter-spacing: -1px;
+}
+.cta-center p {
+  margin-top: 0.6rem;
+  font-size: 0.8vw;
+  color: #ff0000;
+  font-weight: 600;
+  letter-spacing: -1px;
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .menu-list li {
+    margin: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .menu-btn {
+    width: 6vw;
+    height: 6vw;
+    margin-right: 3vw;
+  }
+
+  .menu-list li {
+    margin: 10px;
+  }
+
+  html,
+  body {
+    overflow: auto;
+    height: auto;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 90%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    border-radius: 24px;
+    padding: 8vw 0;
+  }
+
+  .cta-center {
+    position: static;
+    transform: none;
+    text-align: center;
+    margin: 0 auto 8vw;
+    max-width: 88vw;
+  }
+  .cta-center h1 {
+    font-size: 6vw;
+    letter-spacing: -0.5px;
+  }
+  .cta-center p {
+    font-size: 3.4vw;
+  }
+
+  .agent-container {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6vw 4vw;
+    width: 90%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0;
+    z-index: 3;
+    pointer-events: auto;
+  }
+
+  .agent-image {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  .jax {
+    order: 1;
+  }
+  .tom {
+    order: 2;
+  }
+  .eva {
+    order: 3;
+  }
+  .talia {
+    order: 4;
+  }
+  .lily {
+    order: 5;
+  }
+  .paul {
+    order: 6;
+  }
+  .adam {
+    order: 7;
+  }
+}
+
+@media (max-width: 420px) {
+  .agent-container {
+    grid-template-columns: 1fr;
+    gap: 7vw;
+  }
+  .cta-center h1 {
+    font-size: 7vw;
+  }
+  .cta-center p {
+    font-size: 3.6vw;
+  }
 }
