@@ -19,16 +19,17 @@ body {
 }
 
 .wrapper {
+  background-color: #ffb1c1;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+
   position: relative;
   width: 90%;
   height: 100%;
   max-width: 1440px;
   max-height: 90vh;
   aspect-ratio: 4 / 3;
-  background-color: #ffb1c1;
-  border-radius: 40px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 
   display: block;
   padding: 0;
@@ -37,15 +38,21 @@ body {
 
 .page-wrapper {
   background-color: #ffb1c1;
-  border: 10px solid black;
   border-radius: 40px;
-  padding: 40px;
-  max-width: 1440px;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+
+  position: relative;
   width: 90%;
   height: 100%;
+  max-width: 1440px;
   max-height: 90vh;
+  aspect-ratio: 4 / 3;
+
   overflow-y: auto;
-  box-sizing: border-box;
+
+  display: block;
+  padding: 0;
+  gap: 0;
 }
 
 .text-wrapper {
@@ -121,13 +128,14 @@ ul li {
 
 .floating-menu {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+
+  margin-bottom: 5vw;
+  margin-right: 5vw;
   z-index: 1000;
 }
 
 .menu-btn {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   font-size: 24px;
   border: none;
@@ -189,7 +197,7 @@ ul li {
   justify-content: center;
   text-decoration: none;
 
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   font-size: 24px;
   border: none;
@@ -272,7 +280,7 @@ ul li {
   padding: 1rem;
   padding-top: 5rem;
 
-  max-height: 80vh;
+  max-height: 85vh;
 }
 
 .lyrics-scroll {
@@ -440,6 +448,10 @@ li.current {
   }
 }
 @media (max-width: 768px) {
+  .lyrics {
+    max-height: 90vh;
+  }
+
   .lyrics-wrapper {
     width: 100%;
   }
@@ -476,7 +488,7 @@ li.current {
     height: auto;
     max-height: none;
     aspect-ratio: auto;
-    border-radius: 24px;
+
     padding: 8vw 0;
   }
 
@@ -556,17 +568,6 @@ li.current {
     height: 45px;
     z-index: 10;
   }
-
-  .floating-menu {
-    position: absolute; /* 데스크톱의 fixed를 모바일에서만 override */
-    right: 10px;
-    bottom: calc(
-      10px + env(safe-area-inset-bottom)
-    ); /* iOS 세이프에어리어 대응 */
-    top: auto;
-    left: auto;
-    z-index: 10;
-  }
 }
 
 @media (max-width: 420px) {
@@ -642,7 +643,6 @@ li {
   margin: 2vh auto 0vh;
   width: 100%;
   padding: var(--page-pad-lg);
-  border: 8px solid black; /* 살짝 슬림하게 */
 }
 .text-wrapper,
 .lyrics-wrapper {
@@ -668,7 +668,7 @@ li {
 @media (max-width: 768px) {
   .page-wrapper {
     padding: var(--page-pad);
-    border-width: 6px;
+    margin-top: 5vw;
     width: min(96%, var(--page-max));
   }
   .text-huge {
@@ -679,9 +679,11 @@ li {
 
 /* 5) 드롭다운 메뉴가 화면 밖으로 밀려나지 않도록 */
 .floating-menu {
-  bottom: 16px;
-  right: 16px;
+  margin: 0;
+  bottom: 11vw;
+  right: 6.5vw;
 }
+
 .menu-list {
   bottom: calc(var(--tap) + 12px);
   right: 0;
@@ -720,10 +722,10 @@ li {
 
 /* Make the pink frame (page border) as tall as other pages */
 .page-wrapper {
-  min-height: calc(
-    100svh - 4vh
-  ); /* 100svh minus vertical margins (4vh top, 6vh bottom) */
   box-sizing: border-box;
+  min-height: calc(
+    100svh - 6vh
+  ); /* 100svh minus vertical margins (4vh top, 6vh bottom) */
 }
 
 /* === Desktop width alignment & Adam controls placement === */
@@ -735,7 +737,9 @@ li {
 
 @media (min-width: 1024px) {
   .page-wrapper {
-    width: min(95%, var(--page-max-desktop));
+    min-height: calc(
+      100svh - 10vh
+    ); /* 100svh minus vertical margins (4vh top, 6vh bottom) */
   }
 }
 
