@@ -449,8 +449,9 @@ li.current {
   }
 
   .page-wrapper {
-    margin-top: 4.5vh;
+    margin-top: 30px;
     width: 95%;
+    position: relative;
   }
 
   .menu-list li {
@@ -545,13 +546,26 @@ li.current {
   .menu-btn {
     width: 45px;
     height: 45px;
-    top: 10px;
   }
 
   .close-button {
+    position: absolute;
+    top: auto;
+    right: 10px;
     width: 45px;
     height: 45px;
-    top: 10px;
+    z-index: 10;
+  }
+
+  .floating-menu {
+    position: absolute; /* 데스크톱의 fixed를 모바일에서만 override */
+    right: 10px;
+    bottom: calc(
+      10px + env(safe-area-inset-bottom)
+    ); /* iOS 세이프에어리어 대응 */
+    top: auto;
+    left: auto;
+    z-index: 10;
   }
 }
 
@@ -613,6 +627,10 @@ li {
   font-size: 5vw;
 }
 
+.lyrics {
+  min-height: 85vh;
+}
+
 /* 2) 텍스트/가사 래퍼 폭을 통일된 그리드로 */
 :root {
   --page-max: 900px; /* 모바일-태블릿 공통 최대 폭 */
@@ -621,8 +639,8 @@ li {
   --tap: 48px; /* 접근성 탭 타깃 */
 }
 .page-wrapper {
-  margin: 4vh auto 6vh;
-  width: min(95%, var(--page-max));
+  margin: 2vh auto 0vh;
+  width: 100%;
   padding: var(--page-pad-lg);
   border: 8px solid black; /* 살짝 슬림하게 */
 }
@@ -703,7 +721,7 @@ li {
 /* Make the pink frame (page border) as tall as other pages */
 .page-wrapper {
   min-height: calc(
-    100svh - 10vh
+    100svh - 4vh
   ); /* 100svh minus vertical margins (4vh top, 6vh bottom) */
   box-sizing: border-box;
 }
