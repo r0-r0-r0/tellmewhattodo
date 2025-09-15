@@ -129,8 +129,6 @@ ul li {
 .floating-menu {
   position: fixed;
 
-  margin-bottom: 5vw;
-  margin-right: 5vw;
   z-index: 1000;
 }
 
@@ -263,7 +261,7 @@ ul li {
   background: linear-gradient(
     to bottom,
     rgba(255, 177, 193, 1),
-    rgba(255, 177, 193, 0)
+    rgba(255, 177, 193, 0.5)
   );
 }
 .fade-bottom {
@@ -271,7 +269,7 @@ ul li {
   background: linear-gradient(
     to top,
     rgba(255, 177, 193, 1),
-    rgba(255, 177, 193, 0)
+    rgba(255, 177, 193, 0.6)
   );
 }
 
@@ -740,6 +738,21 @@ li {
     min-height: calc(
       100svh - 10vh
     ); /* 100svh minus vertical margins (4vh top, 6vh bottom) */
+  }
+
+  .floating-menu {
+    margin: 0;
+    bottom: 5vw;
+    right: 6.5vw;
+  }
+}
+
+@media (min-width: 1591px) {
+  .floating-menu {
+    margin: 0;
+
+    right: 1vw;
+    bottom: 1vw;
   }
 }
 
