@@ -272,7 +272,7 @@ ul li {
   padding: 1rem;
   padding-top: 5rem;
 
-  max-height: 70vh;
+  max-height: 80vh;
 }
 
 .lyrics-scroll {
@@ -307,7 +307,7 @@ li.current {
 .button-set {
   position: absolute;
   z-index: 30;
-  bottom: -100px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -333,7 +333,7 @@ li.current {
   border: none;
   background: #333;
   color: #fff;
-  font-size: 20px;
+  font-size: 15px;
   cursor: pointer;
 }
 .controls button:hover {
@@ -566,4 +566,229 @@ li.current {
   .cta-center p {
     font-size: 3.6vw;
   }
+}
+
+/* === MOBILE LAYOUT NORMALIZE (patch) === */
+
+/* 1) '가사' 전용 리스트 스타일로 스코프 축소: 전역 ul/li 오염 방지 */
+ul,
+li {
+  /* 전역 초기화 복구 */
+  list-style: initial;
+  padding-left: 1.1em;
+  margin: 0;
+}
+.text-wrapper ul {
+  /* 본문 리스트: 디스크 불릿 유지 */
+  list-style: disc;
+}
+.text-wrapper li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #000;
+  opacity: 1;
+  margin: 0.5em 0;
+}
+/* 가사 전용 스타일은 .lyrics 영역으로 한정 */
+.panel.lyrics ul,
+.lyrics-wrapper ul {
+  list-style: none;
+  padding-left: 0;
+}
+.panel.lyrics li,
+.lyrics-wrapper li {
+  margin: 0.6em 0;
+  opacity: 0.55;
+  transition: 0.25s;
+  font-size: clamp(14px, 4vw, 20px);
+  line-height: 1.4;
+  color: #504747;
+  font-weight: 400;
+}
+.panel.lyrics li.current,
+.lyrics-wrapper li.current {
+  opacity: 1;
+  color: #fff;
+  font-weight: 600;
+  font-size: 5vw;
+}
+
+/* 2) 텍스트/가사 래퍼 폭을 통일된 그리드로 */
+:root {
+  --page-max: 900px; /* 모바일-태블릿 공통 최대 폭 */
+  --page-pad: 24px; /* 모바일 기본 내부 여백 */
+  --page-pad-lg: 40px; /* 데스크톱 내부 여백 */
+  --tap: 48px; /* 접근성 탭 타깃 */
+}
+.page-wrapper {
+  margin: 4vh auto 6vh;
+  width: min(95%, var(--page-max));
+  padding: var(--page-pad-lg);
+  border: 8px solid black; /* 살짝 슬림하게 */
+}
+.text-wrapper,
+.lyrics-wrapper {
+  width: 100%;
+  max-width: 68ch; /* 읽기 최적 폭 */
+  margin: 0 auto;
+}
+.text-huge {
+  margin-bottom: 1.25rem; /* 과한 하단 여백 완화 */
+}
+
+/* 3) 버튼(닫기/메뉴) 크기와 탭타깃을 픽셀로 일관화 */
+.menu-btn,
+.close-button {
+  width: var(--tap);
+  height: var(--tap);
+  min-width: var(--tap);
+  min-height: var(--tap);
+  font-size: 24px;
+}
+
+/* 4) 작은 화면에서 프레임 여백 줄이기 */
+@media (max-width: 768px) {
+  .page-wrapper {
+    padding: var(--page-pad);
+    border-width: 6px;
+    width: min(96%, var(--page-max));
+  }
+  .text-huge {
+    font-size: 1.7rem;
+    line-height: 2.1rem;
+  }
+}
+
+/* 5) 드롭다운 메뉴가 화면 밖으로 밀려나지 않도록 */
+.floating-menu {
+  bottom: 16px;
+  right: 16px;
+}
+.menu-list {
+  bottom: calc(var(--tap) + 12px);
+  right: 0;
+  gap: 10px;
+}
+.menu-list a {
+  display: block;
+}
+
+/* 6) 비평/바이오 페이지의 <ul> 내부 마크업 보정용(안전망) */
+.text-wrapper ul p {
+  margin: 0;
+  display: list-item;
+}
+
+/* === UI refinements per Princess' feedback === */
+
+/* Remove bullets from menus */
+.menu-list,
+.menu-list li {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+/* Ensure dialogue lines never show bullets even if scoped differently */
+#list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+#list li {
+  list-style: none;
+  margin: 0.6em 0;
+}
+
+/* Make the pink frame (page border) as tall as other pages */
+.page-wrapper {
+  min-height: calc(
+    100svh - 10vh
+  ); /* 100svh minus vertical margins (4vh top, 6vh bottom) */
+  box-sizing: border-box;
+}
+
+/* === Desktop width alignment & Adam controls placement === */
+
+/* Wider pink frame on desktop to match index width, while keeping text width (68ch) */
+:root {
+  --page-max-desktop: 1280px;
+}
+
+@media (min-width: 1024px) {
+  .page-wrapper {
+    width: min(95%, var(--page-max-desktop));
+  }
+}
+
+/* Agent pages: keep controls near bottom inside the pink frame */
+.lyrics-wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel.lyrics {
+  flex: 1 1 auto; /* occupy remaining space to push controls down */
+}
+
+/* Controls block at the bottom with breathing room */
+.controls {
+  margin-top: auto;
+  padding-top: 12px;
+  padding-bottom: calc(var(--tap) + 12px); /* avoid overlapping floating menu */
+}
+
+/* === Unify non-index page frame width & push controls lower === */
+
+/* All .page-wrapper now same absolute max-width as index */
+.page-wrapper {
+  max-width: 1280px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Controls area: push further down inside pink frame */
+.controls {
+  margin-top: auto;
+  padding-top: 16px;
+  padding-bottom: calc(var(--tap) * 2); /* more breathing space at bottom */
+}
+
+/* === Final overrides: match index width; push controls further down === */
+
+/* 1) Match index's pink frame absolute width across non-index pages */
+.page-wrapper {
+  width: 90%;
+  max-width: 1440px;
+}
+
+/* 2) Adam: controls anchored towards bottom inside the pink frame */
+.lyrics-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.panel.lyrics {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+/* Let the scrolling area occupy available space */
+.panel.lyrics .lyrics-scroll {
+  flex: 1 1 auto;
+  max-height: none; /* let flexbox handle height */
+  overflow: auto;
+}
+
+/* Controls: no absolute positioning; sit at the bottom */
+.controls {
+  position: static;
+  margin-top: auto;
+  align-self: center;
+  padding-top: 12px;
+  padding-bottom: calc(var(--tap) + 24px);
 }

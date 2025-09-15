@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Minimal LRC Sync Player</title>
+    <title>Tell me what to do</title>
     <link rel="stylesheet" href="style.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -37,8 +37,8 @@
     
 
     <div class ="button-set">
-      <button id="playBtn">Play</button>
-      <button id="speedBtn">⏩ 1.0x</button>
+      <button id="playBtn" aria-label="Play or pause audio">Play</button>
+      <button id="speedBtn" aria-label="Change playback speed">⏩ 1.0x</button>
       <audio id="audio" preload="auto" playsinline hidden></audio>
       </div>
       </div>
@@ -58,21 +58,7 @@
       
     </div>
     </div>
-  </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <script>
+<script>
 
          const menuBtn = document.querySelector(".menu-btn");
     const menuList = document.querySelector(".menu-list");
@@ -94,7 +80,7 @@
       menuList.style.display = "none";
     });
 
-      const DEFAULT_AUDIO_SRC = "/audio/someonetohearme.mp3";
+      const DEFAULT_AUDIO_SRC = "./audio/someonetohearme.mp3";
 
       const DEFAULT_LRC_TEXT = `
 [00:00:00.80]Thank you for registering for your free trial of Tell Me What To Do.
@@ -249,5 +235,5 @@
         speedBtn.textContent = "⏩ " + speeds[spIndex].toFixed(2) + "x";
       });
     </script>
-  </body>
+</body>
 </html>
