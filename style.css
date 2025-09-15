@@ -186,9 +186,9 @@ ul li {
 }
 
 .close-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  position: fixed;
+  top: 8vh;
+  right: 6.5vw;
 
   display: flex;
   align-items: center;
@@ -559,7 +559,6 @@ li.current {
   }
 
   .close-button {
-    position: absolute;
     top: auto;
     right: 10px;
     width: 45px;
@@ -678,7 +677,12 @@ li {
 /* 5) 드롭다운 메뉴가 화면 밖으로 밀려나지 않도록 */
 .floating-menu {
   margin: 0;
-  bottom: 11vw;
+  bottom: 6vh;
+  right: 6.5vw;
+}
+
+.close-button {
+  top: 5vh;
   right: 6.5vw;
 }
 
@@ -742,17 +746,34 @@ li {
 
   .floating-menu {
     margin: 0;
-    bottom: 5vw;
-    right: 6.5vw;
+    bottom: 6vh;
+    right: 7vw;
+  }
+  .close-button {
+    top: 8vh;
+    right: 7vw;
   }
 }
 
 @media (min-width: 1591px) {
+  :root {
+    --cx: 50vw; /* 화면 중심 X */
+    --cy: 50vh; /* 화면 중심 Y */
+    --offx: 670px; /* +면 오른쪽, -면 왼쪽으로 이동 */
+    --offy: -40vh; /* -면 위로, +면 아래로 이동 */
+  }
+
   .floating-menu {
     margin: 0;
 
     right: 1vw;
-    bottom: 1vw;
+    bottom: 1vh;
+  }
+  .close-button {
+    left: calc(var(--cx) + var(--offx));
+    top: calc(var(--cy) + var(--offy));
+    transform: translate(-50%, -50%); /* 버튼 중심 정렬 유지 */
+    z-index: 10;
   }
 }
 
