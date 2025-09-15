@@ -61,7 +61,7 @@ body {
 .text-huge {
   font-size: 3rem;
   line-height: 3rem;
-  font-weight: 900;
+  font-weight: 600;
   margin-bottom: 50px;
 }
 .header h1 {
@@ -80,7 +80,7 @@ h2 {
   margin-top: 30px;
   font-size: 1.5rem;
   line-height: 2rem;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 blockquote {
@@ -537,6 +537,11 @@ li.current {
   }
   .adam {
     order: 7;
+  }
+
+  .text-huge {
+    font-size: 2.2rem;
+    line-height: 2.5rem;
   }
 }
 
