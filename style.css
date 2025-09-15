@@ -90,6 +90,10 @@ h2 {
   font-weight: 600;
 }
 
+a {
+  color: rgb(255, 0, 128);
+}
+
 blockquote {
   font-style: italic;
   background-color: rgba(0, 0, 0, 0.05);
@@ -346,14 +350,6 @@ li.current {
   background: #444;
 }
 
-.agent-image-min {
-  width: 56px;
-  height: 56px;
-  border-radius: 8px;
-  object-fit: cover;
-  border: 2px solid #fff;
-}
-
 .agent-intro {
   position: absolute;
   top: 12px;
@@ -382,10 +378,24 @@ li.current {
   font-size: 13px;
   line-height: 1.35;
   max-width: 500px;
-  min-width: 40vw;
+  min-width: 0vw;
   white-space: normal;
   word-break: keep-all;
   overflow-wrap: anywhere;
+  animation: bubble-pulse 2s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+@keyframes bubble-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateZ(0) scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translateZ(0) scale(1.03);
+  }
 }
 
 .agent-container {
@@ -739,6 +749,7 @@ li {
 
 @media (min-width: 1024px) {
   .page-wrapper {
+    margin-top: -0.1vh;
     min-height: calc(
       100svh - 10vh
     ); /* 100svh minus vertical margins (4vh top, 6vh bottom) */
