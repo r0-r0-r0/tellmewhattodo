@@ -450,8 +450,8 @@ li.current {
   }
 
   .menu-btn {
-    width: 6vw;
-    height: 6vw;
+    width: 7vw;
+    height: 7vw;
     margin-right: 3vw;
   }
 
@@ -542,6 +542,12 @@ li.current {
   .text-huge {
     font-size: 2.2rem;
     line-height: 2.5rem;
+  }
+
+  .close-button {
+    width: 7vw;
+    height: 7vw;
+    top: 10px;
   }
 }
 
