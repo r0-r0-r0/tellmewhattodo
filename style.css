@@ -440,6 +440,15 @@ li.current {
   }
 }
 @media (max-width: 768px) {
+  .text-wrapper {
+    width: 90%;
+  }
+
+  .page-wrapper {
+    margin-top: 4vh;
+    width: 95%;
+  }
+
   .menu-btn {
     width: 6vw;
     height: 6vw;
