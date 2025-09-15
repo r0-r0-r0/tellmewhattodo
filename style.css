@@ -440,19 +440,17 @@ li.current {
   }
 }
 @media (max-width: 768px) {
+  .lyrics-wrapper {
+    width: 100%;
+  }
+
   .text-wrapper {
     width: 90%;
   }
 
   .page-wrapper {
-    margin-top: 4vh;
+    margin-top: 4.5vh;
     width: 95%;
-  }
-
-  .menu-btn {
-    width: 7vw;
-    height: 7vw;
-    margin-right: 3vw;
   }
 
   .menu-list li {
@@ -544,9 +542,15 @@ li.current {
     line-height: 2.5rem;
   }
 
+  .menu-btn {
+    width: 45px;
+    height: 45px;
+    top: 10px;
+  }
+
   .close-button {
-    width: 7vw;
-    height: 7vw;
+    width: 45px;
+    height: 45px;
     top: 10px;
   }
 }
