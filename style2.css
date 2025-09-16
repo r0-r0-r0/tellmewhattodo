@@ -18,41 +18,24 @@ body {
   font-size: 0.95rem;
 }
 
-.wrapper {
-  background-color: #ffb1c1;
-  border-radius: 40px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
-
-  position: relative;
-  width: 90%;
-  height: 100%;
-  max-width: 1440px;
-  max-height: 90vh;
-  aspect-ratio: 4 / 3;
-
-  display: block;
-  padding: 0;
-  gap: 0;
-}
-
 .page-wrapper {
   background-color: #ffb1c1;
   border-radius: 40px;
   box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
-
   position: relative;
   width: 90%;
-  height: 100%;
+  height: auto;
   max-width: 1440px;
   max-height: 90vh;
-  aspect-ratio: 4 / 3;
+  min-height: 100svh; /* ← iOS 주소창 변동 대응 */
+  min-height: 100dvh;
 
+  aspect-ratio: auto;
   overflow-y: auto;
-
   display: block;
   padding: 0;
   gap: 0;
+  box-sizing: border-box; /* 하단의 중복 블록에 있던 것만 추가 */
 }
 
 .text-wrapper {
@@ -425,12 +408,6 @@ blockquote {
     width: 90%;
   }
 
-  .page-wrapper {
-    margin-top: 30px;
-    width: 95%;
-    position: relative;
-  }
-
   .menu-list li {
     margin: 20px;
   }
@@ -439,22 +416,6 @@ blockquote {
   body {
     overflow: auto;
     height: auto;
-  }
-
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-
-    width: 90%;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    height: auto;
-    max-height: none;
-    aspect-ratio: auto;
-
-    padding: 8vw 0;
   }
 
   .cta-center {
@@ -545,92 +506,96 @@ blockquote {
   .cta-center p {
     font-size: 3.6vw;
   }
-}
 
-/* === MOBILE LAYOUT NORMALIZE (patch) === */
+  /* === MOBILE LAYOUT NORMALIZE (patch) === */
 
-/* 1) '가사' 전용 리스트 스타일로 스코프 축소: 전역 ul/li 오염 방지 */
-ul,
-li {
-  /* 전역 초기화 복구 */
-  list-style: initial;
-  padding-left: 1.1em;
-  margin: 0;
-}
-.text-wrapper ul {
-  /* 본문 리스트: 디스크 불릿 유지 */
-  list-style: disc;
-}
-.text-wrapper li {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #000;
-  opacity: 1;
-  margin: 0.5em 0;
-}
-/* 가사 전용 스타일은 .lyrics 영역으로 한정 */
-.panel.lyrics ul,
-.lyrics-wrapper ul {
-  list-style: none;
-  padding-left: 0;
-}
-.panel.lyrics li,
-.lyrics-wrapper li {
-  margin: 0.6em 0;
-  opacity: 0.55;
-  transition: 0.25s;
-  font-size: clamp(14px, 4vw, 20px);
-  line-height: 1.4;
-  color: #504747;
-  font-weight: 400;
-}
-.panel.lyrics li.current,
-.lyrics-wrapper li.current {
-  opacity: 1;
-  color: #fff;
-  font-weight: 600;
-  font-size: clamp(18px, 4vw, 30px);
-}
+  /* 1) '가사' 전용 리스트 스타일로 스코프 축소: 전역 ul/li 오염 방지 */
+  ul,
+  li {
+    /* 전역 초기화 복구 */
+    list-style: initial;
+    padding-left: 1.1em;
+    margin: 0;
+  }
+  .text-wrapper ul {
+    /* 본문 리스트: 디스크 불릿 유지 */
+    list-style: disc;
+  }
+  .text-wrapper li {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #000;
+    opacity: 1;
+    margin: 0.5em 0;
+  }
+  /* 가사 전용 스타일은 .lyrics 영역으로 한정 */
+  .panel.lyrics ul,
+  .lyrics-wrapper ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .panel.lyrics li,
+  .lyrics-wrapper li {
+    margin: 0.6em 0;
+    opacity: 0.55;
+    transition: 0.25s;
+    font-size: clamp(14px, 4vw, 20px);
+    line-height: 1.4;
+    color: #504747;
+    font-weight: 400;
+  }
+  .panel.lyrics li.current,
+  .lyrics-wrapper li.current {
+    opacity: 1;
+    color: #fff;
+    font-weight: 600;
+    font-size: clamp(18px, 4vw, 30px);
+  }
 
-.lyrics {
-  min-height: 85vh;
-}
+  .lyrics {
+    min-height: 85vh;
+  }
 
-/* 2) 텍스트/가사 래퍼 폭을 통일된 그리드로 */
-:root {
-  --page-max: 900px; /* 모바일-태블릿 공통 최대 폭 */
-  --page-pad: 24px; /* 모바일 기본 내부 여백 */
-  --page-pad-lg: 40px; /* 데스크톱 내부 여백 */
-  --tap: 48px; /* 접근성 탭 타깃 */
-}
-.page-wrapper {
-  margin: 2vh auto 0vh;
-  width: 100%;
-  padding: var(--page-pad-lg);
-}
-.text-wrapper,
-.lyrics-wrapper {
-  width: 100%;
-  max-width: 68ch; /* 읽기 최적 폭 */
-  margin: 0 auto;
-}
-.text-huge {
-  margin-bottom: 1.25rem; /* 과한 하단 여백 완화 */
-}
+  /* 2) 텍스트/가사 래퍼 폭을 통일된 그리드로 */
+  :root {
+    --page-max: 900px; /* 모바일-태블릿 공통 최대 폭 */
+    --page-pad: 24px; /* 모바일 기본 내부 여백 */
+    --page-pad-lg: 40px; /* 데스크톱 내부 여백 */
+    --tap: 48px; /* 접근성 탭 타깃 */
+  }
+  .page-wrapper {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: var(--page-pad-lg);
+  }
+  .text-wrapper,
+  .lyrics-wrapper {
+    width: 100%;
 
-/* 3) 버튼(닫기/메뉴) 크기와 탭타깃을 픽셀로 일관화 */
-.menu-btn,
-.close-button {
-  width: var(--tap);
-  height: var(--tap);
-  min-width: var(--tap);
-  min-height: var(--tap);
-  font-size: 24px;
+    max-width: 68ch; /* 읽기 최적 폭 */
+    margin: 0 auto;
+  }
+  .text-huge {
+    margin-bottom: 1.25rem; /* 과한 하단 여백 완화 */
+  }
+
+  /* 3) 버튼(닫기/메뉴) 크기와 탭타깃을 픽셀로 일관화 */
+  .menu-btn,
+  .close-button {
+    width: var(--tap);
+    height: var(--tap);
+    min-width: var(--tap);
+    min-height: var(--tap);
+    font-size: 24px;
+  }
 }
 
 /* 4) 작은 화면에서 프레임 여백 줄이기 */
 @media (max-width: 768px) {
   .page-wrapper {
+    position: relative;
+    top: auto;
     padding: var(--page-pad);
     margin-top: 5vw;
     width: min(96%, var(--page-max));
@@ -689,14 +654,6 @@ li {
   margin: 0.6em 0;
 }
 
-/* Make the pink frame (page border) as tall as other pages */
-.page-wrapper {
-  box-sizing: border-box;
-  min-height: calc(
-    100svh - 6vh
-  ); /* 100svh minus vertical margins (4vh top, 6vh bottom) */
-}
-
 /* === Desktop width alignment & Adam controls placement === */
 
 /* Wider pink frame on desktop to match index width, while keeping text width (68ch) */
@@ -706,6 +663,8 @@ li {
 
 @media (min-width: 1024px) {
   .page-wrapper {
+    position: relative;
+    top: auto;
     margin-top: -0.1vh;
     min-height: calc(
       100svh - 10vh
@@ -765,14 +724,6 @@ li {
 
 /* === Unify non-index page frame width & push controls lower === */
 
-/* All .page-wrapper now same absolute max-width as index */
-.page-wrapper {
-  max-width: 1280px;
-  width: 95%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* Controls area: push further down inside pink frame */
 .controls {
   margin-top: auto;
@@ -781,12 +732,6 @@ li {
 }
 
 /* === Final overrides: match index width; push controls further down === */
-
-/* 1) Match index's pink frame absolute width across non-index pages */
-.page-wrapper {
-  width: 90%;
-  max-width: 1440px;
-}
 
 /* 2) Adam: controls anchored towards bottom inside the pink frame */
 .lyrics-wrapper {
