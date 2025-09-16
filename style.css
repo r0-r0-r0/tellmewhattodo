@@ -632,7 +632,7 @@ li {
   opacity: 1;
   color: #fff;
   font-weight: 600;
-  font-size: 3vw;
+  font-size: clamp(18px, 4vw, 30px);
 }
 
 .lyrics {
