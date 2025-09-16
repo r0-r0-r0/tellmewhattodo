@@ -687,7 +687,7 @@ li {
 /* 5) 드롭다운 메뉴가 화면 밖으로 밀려나지 않도록 */
 .floating-menu {
   margin: 0;
-  bottom: 6vh;
+  bottom: 5vh;
   right: 6.5vw;
 }
 
@@ -761,7 +761,7 @@ li {
     right: 7vw;
   }
   .close-button {
-    top: 8vh;
+    top: 6vh;
     right: 7vw;
   }
 }
@@ -771,7 +771,7 @@ li {
     --cx: 50vw; /* 화면 중심 X */
     --cy: 50vh; /* 화면 중심 Y */
     --offx: 670px; /* +면 오른쪽, -면 왼쪽으로 이동 */
-    --offy: -40vh; /* -면 위로, +면 아래로 이동 */
+    --offy: -41vh; /* -면 위로, +면 아래로 이동 */
   }
 
   .floating-menu {
@@ -782,7 +782,7 @@ li {
   }
   .close-button {
     left: calc(var(--cx) + var(--offx));
-    top: calc(var(--cy) + var(--offy));
+    top: clamp(40px, calc(var(--cy) + var(--offy)), 90vh);
     transform: translate(-50%, -50%); /* 버튼 중심 정렬 유지 */
     z-index: 10;
   }
