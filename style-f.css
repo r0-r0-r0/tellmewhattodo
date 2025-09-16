@@ -1,0 +1,695 @@
+/* ==========================================================================
+   Aria Ro — UI Styles (Refactored)
+   - Design tokens (:root)
+   - Base + Layout
+   - Components
+   - Utilities
+   - Responsive
+   Notes:
+   • Units: prefer px for tap targets/controls, responsive text with clamp/vw where helpful.
+   • Z-index scale: base 0–9, content 10–49, overlays 50–99, floating 100+
+   • Colors & spacing via CSS variables for easy theming.
+   ========================================================================== */
+
+/* ----------------------------------
+   Design Tokens
+---------------------------------- */
+:root {
+  /* Colors */
+  --pink: #ffb1c1;
+  --white: #ffffff;
+  --black: #000000;
+  --text: #000000;
+  --text-muted: #504747;
+  --accent: rgb(255, 0, 128);
+  --danger: #ff0000;
+
+  /* Effects */
+  --shadow-strong: 0 0 20px rgba(255, 0, 0, 0.7);
+
+  /* Typography */
+  --font-sans: "Raleway", system-ui, -apple-system, Segoe UI, Roboto,
+    "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  --fs-base: 0.95rem;
+  --lh-base: 1.6;
+
+  /* Sizing */
+  --radius-xl: 40px;
+  --tap: 48px; /* minimum tap target (px) */
+  --page-max: 1440px; /* frame max width */
+  --content-max: 68ch; /* optimal reading width */
+
+  /* Spacing */
+  --pad: 24px;
+  --pad-lg: 40px;
+
+  /* Layout helpers */
+  --fade-h: 200px;
+
+  /* Desktop tweak */
+  --page-max-desktop: 1280px;
+}
+
+/* ----------------------------------
+   CSS Reset (light)
+---------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--black);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  overflow: hidden;
+}
+
+/* ----------------------------------
+   Links & Text
+---------------------------------- */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.text-wrapper {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 2vw auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.8rem;
+}
+.text-huge {
+  font-size: clamp(1.7rem, 3vw, 3rem);
+  line-height: 1.1;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+.header h1 {
+  font-size: 1rem;
+  line-height: 2rem;
+  margin-bottom: 20px;
+}
+.lead {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+h2 {
+  margin-top: 30px;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+blockquote {
+  font-style: italic;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 10px 15px;
+  border-left: 4px solid var(--black);
+  margin: 20px 0;
+}
+
+/* ----------------------------------
+   Lists (scoped defaults)
+---------------------------------- */
+/* Default content lists */
+.text-wrapper ul {
+  list-style: disc;
+  padding-left: 1.1em;
+}
+.text-wrapper li {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  opacity: 1;
+  margin: 0.5em 0;
+}
+
+/* Lyrics-only list normalization */
+.panel.lyrics ul,
+.lyrics-wrapper ul,
+#list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.panel.lyrics li,
+.lyrics-wrapper li,
+#list li {
+  list-style: none;
+  margin: 0.6em 0;
+  opacity: 0.55;
+  transition: opacity 0.25s ease, color 0.25s ease;
+  font-size: clamp(14px, 4vw, 20px);
+  line-height: 1.4;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.panel.lyrics li.current,
+.lyrics-wrapper li.current {
+  opacity: 1;
+  color: var(--white);
+  font-weight: 600;
+  font-size: clamp(16px, 5vw, 24px);
+}
+
+/* Safety net: paragraphs nested in ULs should behave as list items */
+.text-wrapper ul p {
+  margin: 0;
+  display: list-item;
+}
+
+/* ----------------------------------
+   Frames & Layout
+---------------------------------- */
+.wrapper,
+.page-wrapper {
+  position: relative;
+  width: 90%;
+  max-width: var(--page-max);
+  background-color: var(--pink);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-strong);
+  overflow: hidden;
+}
+
+/* Index-like canvas */
+.wrapper {
+  height: 100%;
+  max-height: 90vh;
+  display: block;
+}
+
+/* Non-index pages with scrolling content */
+.page-wrapper {
+  margin: 2vh auto 0;
+  width: 90%;
+  padding: var(--pad-lg);
+  overflow-y: auto;
+  min-height: calc(100svh - 6vh);
+}
+
+/* Maintain consistent frame width across pages */
+.page-wrapper {
+  width: 90%;
+  max-width: var(--page-max);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* Content zones */
+.text-wrapper,
+.lyrics-wrapper {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+/* ----------------------------------
+   Imagery & Overlays
+---------------------------------- */
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  z-index: 1; /* base */
+}
+
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 50; /* overlay */
+}
+
+/* ----------------------------------
+   Floating Controls (Menu & Close)
+---------------------------------- */
+.floating-menu {
+  position: fixed;
+  right: 6.5vw;
+  bottom: 6vh;
+  z-index: 100; /* floating */
+  margin: 0;
+}
+.menu-btn,
+.close-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap);
+  height: var(--tap);
+  min-width: var(--tap);
+  min-height: var(--tap);
+  font-size: 24px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  position: relative;
+  z-index: 60;
+}
+.menu-btn:hover,
+.close-button:hover {
+  background-color: var(--pink);
+  color: var(--black);
+}
+
+.menu-list,
+.menu-list li {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.menu-list {
+  position: absolute;
+  right: 0;
+  bottom: calc(var(--tap) + 12px);
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 170px;
+  gap: 10px;
+}
+.menu-list li {
+  width: 100%;
+}
+.menu-list a {
+  display: block;
+  background: var(--white);
+  color: var(--black);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+}
+.menu-list a:hover {
+  background: var(--pink);
+}
+
+.close-button {
+  position: fixed;
+  top: 5vh;
+  right: 6.5vw;
+  z-index: 100; /* floating */
+}
+
+/* ----------------------------------
+   Lyrics Panels & Fades
+---------------------------------- */
+.lyrics-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-bottom: 72px;
+}
+.panel {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin: 0;
+}
+.panel.lyrics {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto; /* occupy remaining space */
+}
+
+/* Fades */
+.fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--fade-h);
+  pointer-events: none;
+  z-index: 60; /* overlay */
+}
+.fade-top {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 177, 193, 1),
+    rgba(255, 177, 193, 0.5)
+  );
+}
+.fade-bottom {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(255, 177, 193, 1),
+    rgba(255, 177, 193, 0.6)
+  );
+}
+
+/* Scroll zones */
+.lyrics {
+  overflow: auto;
+  padding: 1rem;
+  padding-top: 5rem;
+  min-height: 85vh;
+}
+.panel.lyrics .lyrics-scroll {
+  flex: 1 1 auto;
+  max-height: none; /* let flexbox handle height */
+  overflow: auto;
+  padding: 6rem 1rem 1rem;
+}
+
+/* ----------------------------------
+   Controls (play/prev/next etc.)
+---------------------------------- */
+/* Anchor controls to bottom within pink frame (no absolute by default) */
+.controls {
+  position: static;
+  margin-top: auto;
+  align-self: center;
+  display: flex;
+  gap: 8px;
+  padding-top: 16px;
+  padding-bottom: calc(var(--tap) * 2);
+  z-index: 10; /* content */
+}
+.controls button {
+  font-family: var(--font-sans);
+  padding: 0.5em 1em;
+  border-radius: 60px;
+  border: none;
+  background: #333333;
+  color: var(--white);
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.controls button:hover {
+  background: #444444;
+}
+
+/* Legacy absolute button set (kept for compatibility) */
+.button-set {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  z-index: 10;
+}
+
+/* ----------------------------------
+   Agent Intro & Images
+---------------------------------- */
+.agent-intro {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 15;
+}
+.agent-image-min {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  object-fit: cover;
+  border: 2px solid var(--white);
+}
+.agent-intro p {
+  margin: 0;
+  background: var(--white);
+  color: var(--black);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.35;
+  max-width: 500px;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  animation: bubble-pulse 2s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+@keyframes bubble-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateZ(0) scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translateZ(0) scale(1.03);
+  }
+}
+
+.agent-container {
+  position: absolute;
+  inset: 0;
+  z-index: 30; /* overlay that still allows interactions inside */
+  pointer-events: none;
+}
+.agent-image {
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  width: calc(var(--w) * 1%);
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+.agent-box {
+  z-index: 40;
+}
+
+/* ----------------------------------
+   CTA Center
+---------------------------------- */
+.cta-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 15;
+  pointer-events: none;
+  max-width: 88vw;
+}
+.cta-center h1 {
+  font-weight: 600;
+  font-size: clamp(24px, 1.8vw, 48px);
+  line-height: 1.1;
+  color: var(--white);
+  letter-spacing: -1px;
+}
+.cta-center p {
+  margin-top: 0.6rem;
+  font-size: clamp(12px, 0.8vw, 18px);
+  color: var(--danger);
+  font-weight: 600;
+  letter-spacing: -1px;
+  animation: blink 1s step-start infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ----------------------------------
+   Desktop Tweaks
+---------------------------------- */
+@media (min-width: 1024px) {
+  .page-wrapper {
+    margin-top: -0.1vh;
+    min-height: calc(100svh - 10vh);
+  }
+  .floating-menu {
+    right: 7vw;
+    bottom: 6vh;
+  }
+  .close-button {
+    top: 8vh;
+    right: 7vw;
+  }
+}
+
+/* Very-wide layout: place the close button relative to visual center */
+@media (min-width: 1591px) {
+  :root {
+    --cx: 50vw; /* screen center X */
+    --cy: 50vh; /* screen center Y */
+    --offx: 670px; /* + → right, - → left */
+    --offy: -40vh; /* - → up, + → down */
+  }
+  .floating-menu {
+    right: 1vw;
+    bottom: 1vh;
+  }
+  .close-button {
+    left: calc(var(--cx) + var(--offx));
+    top: calc(var(--cy) + var(--offy));
+    transform: translate(-50%, -50%);
+    z-index: 100;
+  }
+}
+
+/* ----------------------------------
+   Mobile & Small Screens
+---------------------------------- */
+@media (max-width: 1000px) {
+  .menu-list li {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow: auto;
+    height: auto;
+  }
+
+  .page-wrapper {
+    padding: var(--pad);
+    margin-top: 5vw;
+    width: min(96%, var(--page-max));
+  }
+
+  .text-wrapper {
+    width: 90%;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 90%;
+    margin: 30px 0;
+    height: auto;
+    max-height: none;
+    padding: 8vw 0;
+  }
+
+  .cta-center {
+    position: static;
+    transform: none;
+    text-align: center;
+    margin: 0 auto 8vw;
+  }
+  .cta-center h1 {
+    font-size: 6vw;
+    letter-spacing: -0.5px;
+  }
+  .cta-center p {
+    font-size: 3.4vw;
+  }
+
+  .agent-container {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6vw 4vw;
+    width: 90%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0;
+    pointer-events: auto;
+  }
+  .agent-image {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+  .jax {
+    order: 1;
+  }
+  .tom {
+    order: 2;
+  }
+  .eva {
+    order: 3;
+  }
+  .talia {
+    order: 4;
+  }
+  .lily {
+    order: 5;
+  }
+  .paul {
+    order: 6;
+  }
+  .adam {
+    order: 7;
+  }
+
+  .menu-btn,
+  .close-button {
+    width: 45px;
+    height: 45px;
+  }
+  .close-button {
+    top: auto;
+    right: 10px;
+    z-index: 100;
+  }
+
+  .lyrics {
+    max-height: 90vh;
+  }
+  .lyrics-wrapper {
+    width: 100%;
+  }
+  .menu-list li {
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .agent-container {
+    grid-template-columns: 1fr;
+    gap: 7vw;
+  }
+  .cta-center h1 {
+    font-size: 7vw;
+  }
+  .cta-center p {
+    font-size: 3.6vw;
+  }
+}
